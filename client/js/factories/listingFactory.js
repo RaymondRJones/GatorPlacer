@@ -25,6 +25,22 @@ angular.module('listings', []).factory('Listings', function($http) {
       return $http.get('/api/classes');
     },
 
+    getUFClasses: function() {
+      const headerDict = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Access-Control-Allow-Headers': true,
+      }
+
+      const requestOptions = {
+        headers: new Headers(headerDict),
+      };
+      return $http.jsonp('https://one.ufl.edu/apix/soc/schedule?category=CWSP&term=2188&', 'c')
+
+      //return $http.get('https://crossorigin.me/https://one.ufl.edu/apix/soc/schedule?category=CWSP&term=2188', requestOptions);
+    },
+
+
     createProf: function(newProfessor) {
 	     return $http.post('http://localhost:8080/api/listings', newProfessor);
       },
