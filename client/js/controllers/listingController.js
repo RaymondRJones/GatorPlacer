@@ -4,6 +4,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     $scope.profCourses = [];
     $scope.buildings = [];
     $scope.ta = undefined;
+    $scope.theIndex = undefined;
     /* Get all the listings, then bind it to the scope */
     //TODO View Professors from Mongo DB on api/listings
     Listings.getAll().then(function(response) {
@@ -35,16 +36,14 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       console.log('Unable to retrieve listings:', error);
     });
 
-    /*
+
     Listings.getUFClasses().then(function(response) {
       $scope.uf = response.data;
-
+      console.log($scope.uf);
     },function(error) {
       console.log('Unable to retrieve listings:', error);
     });
-console.log($scope.uf);
-*/
-
+      console.log($scope.buildings);
 //Creates a new professor with inputted user info
     $scope.addTA = function(tEmail) {
       Listings.findByEmail(tEmail).then(function(response) {
@@ -160,11 +159,12 @@ console.log($scope.uf);
         }
       }
     }
-    $scope.showDetails = function(index) {
-      $scope.detailedInfo = $scope.listings[index];
-      prof = $scope.listings[index];
+    $scope.selectProf = function(listing) {
+      prof = listing;
       console.log(prof);
-      console.log("test");
+      if (prof.classes.length = 0) {
+        console.log("empty");
+      }
       //getClasses
       //$scope.listings[index]
       //forEach class, get location
