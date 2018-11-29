@@ -12,6 +12,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     }, function(error) {
       console.log('Unable to retrieve listings:', error);
     });
+
 //Stores Variable for Current User Info, Role/Lastname/FirstName/etc.
     Listings.getUser().then(function(response) {
 
@@ -35,7 +36,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     },function(error) {
       console.log('Unable to retrieve listings:', error);
     });
-
+/*
 
     Listings.getUFClasses().then(function(response) {
       $scope.uf = response.data;
@@ -43,7 +44,8 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     },function(error) {
       console.log('Unable to retrieve listings:', error);
     });
-      console.log($scope.buildings);
+
+    */
 //Creates a new professor with inputted user info
     $scope.addTA = function(tEmail) {
       Listings.findByEmail(tEmail).then(function(response) {

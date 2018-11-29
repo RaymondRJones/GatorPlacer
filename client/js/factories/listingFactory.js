@@ -26,20 +26,14 @@ angular.module('listings', []).factory('Listings', function($http) {
     },
 
     getUFClasses: function() {
-      /*
-      const headerDict = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Access-Control-Allow-Headers': true,
-      }
-
-      const requestOptions = {
-        headers: new Headers(headerDict),
-      };
-*/
       return $http.get('https://cors-anywhere.herokuapp.com/https://one.ufl.edu/apix/soc/schedule?category=CWSP&term=2188', {
         headers: {'x-requested-with': 'foo'}
       });
+      /*
+      return $http.get('https://cors-anywhere.herokuapp.com/https://api.fortnitetracker.com/v1/profile/psn/ispyjohn', {
+        headers: {'TRN-Api-Key':'be67a216-f805-4ebd-b469-8c5dae13d904'}
+      });
+      */
     },
 
 
