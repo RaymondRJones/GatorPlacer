@@ -36,16 +36,8 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     },function(error) {
       console.log('Unable to retrieve listings:', error);
     });
-/*
 
-    Listings.getUFClasses().then(function(response) {
-      $scope.uf = response.data;
-      console.log($scope.uf);
-    },function(error) {
-      console.log('Unable to retrieve listings:', error);
-    });
 
-    */
 //Creates a new professor with inputted user info
     $scope.addTA = function(tEmail) {
       Listings.findByEmail(tEmail).then(function(response) {
@@ -78,6 +70,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
   //TODO Add courses and their Meeting times into array to be used by prof object
     $scope.addCourse = function(courseCode, days, startTime,endTime, location,listing){
 
+
      var locationID;
       for(let i = 0; i < $scope.buildings.length; i++){
         //console.log($scope.buildings[i].code);
@@ -86,19 +79,27 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
          // console.log(locationID);
         }
       }
+      //TO-DO -> Handle Null Entries
+      //Course Validation - Requests UF API to make sure course exists
+      Listings.findUFCourse(courseCode).then(function(response) {
+        $scope.courseInfo = response.data[0].COURSES[0];
+        console.log($scope.courseInfo);
 
-
+      },function(error) {
+        console.log('Unable to retrieve listings:', error);
+      });
       var newCourse = {
         "code": courseCode,
-        "name": "test",
+        "name": $scope.courseInfo.name,
+      //  "description": $scope.courseInfo.description,
         "location": locationID,
         //"time": startTime + endTime + days
       }
+      console.log($scope.courseInfo);
     //  $scope.profCourses.push(newCourse);
     //Use Listings.update to apply changes to old professor
     Listings.createCourse(newCourse).then(function(response){
-      console.log(response)
-      console.log(response.data)
+      //Sometimes throws an error
       $scope.user.classes.push(response.data)
       listing.classes.push(response.data)
       $scope.newListing.classes = listing.classes;
@@ -173,7 +174,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       for(let i = 0; i < $scope.prof.classes.length; i++){
           course = $scope.getClassByID(prof.classes[i]);
           location = $scope.getLocationByID(course.location[i]);
-          $scope.addMark(location._id,course.code);
+        //  $scope.addMark(location._id,course.code);
       }
     };
 
