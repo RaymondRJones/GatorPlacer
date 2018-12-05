@@ -86,8 +86,8 @@
                   <ul class="list-group">
                       <div ng-repeat="class in listing.classes">
                           <div ng-repeat="course in classes" ng-show="class == course._id">
-                              <li class = "list-group-item">
-                                  <div ng-click="selectCourse(course)"  class="alert alert-info" role="alert">{{course.classType}}</div>
+                              <li class = "list-group-item ">
+                                  <div ng-click="selectCourse(course)"  class="btn-default " role="alert">{{course.classType}}</div>
                                 <h4>{{course.code}}  - {{course.name}}</h4>
                                 <!-- <div ng-repeat="building in buildings" ng-show = "course.location == building._id">
                                     <h5>{{building.code}} {{course.room}}</h5>
@@ -95,7 +95,7 @@
                                 <div>
                                   <ul class = "list-group">
                                     <div ng-repeat="time in course.time">
-                                      <li class ="list-group-item">
+                                      <li class ="list-group-item list-group-item-info">
                                         {{time}}
                                       </li>
                                     </div>
