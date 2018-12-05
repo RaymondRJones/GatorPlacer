@@ -11,7 +11,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
       $scope.getCourseNameFromCode = function (courseCode) {
         console.log("Trying to get course name...");
-        if (courseCode.length != 7 ||courseCode.length !=8) {
+        if (courseCode.length != 7){
           $scope.courseName = "";
         } else {
           Listings.getCourseNameFromCode(courseCode.toUpperCase()).then(function (result) {
@@ -237,6 +237,14 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       }
       return (username == listing.email);//is causing error
 
+    };
+
+    $scope.selectCourse = function(course) {
+      //mymap._layers.clearLayers();
+      $scope.removeMarkers();
+          var location = $scope.getLocationByID(course.location);
+          var description = course.code + " - " + course.classType +" - " +"Room: "+ course.room;
+          $scope.addMark(location._id, description );
     };
 
     $scope.TaForm = false;
