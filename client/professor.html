@@ -89,7 +89,7 @@
                   <br>
                   Courses Taught
                   <div ng-repeat="class in listing.classes">
-                    <div ng-click="select-course(course)"ng-repeat="course in classes" ng-show="class == course._id">
+                    <div ng-click="selectCourse(course)" ng-repeat="course in classes" ng-show="class == course._id">
                       <li class="list-group-item">
                         <div class="alert alert-info" role="alert">{{course.classType}}</div>
                         <h5>{{course.code}} {{course.name}}</h5>
